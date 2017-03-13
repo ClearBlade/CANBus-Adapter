@@ -6,8 +6,6 @@
 int initFlag = false;
 
 int messageArrived(void *context, char *topicName, int topicLen, MQTTAsync_message *message) {
-  char* payloadptr;
-
   printf("Message arrived\n");
   printf("Topic: %s\n", topicName);
   printf("Message: %s\n", (char *) message->payload);
