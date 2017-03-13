@@ -8,10 +8,10 @@ SRCS = $(wildcard ./*.c)
 
 OBJS = $(SRCS_C:.c=.o)
 
-MAIN = start_adapter
+MAIN = adapter
 
 all: $(MAIN)
-	@echo Compile complete. Execute main by ./start_adapter
+	@echo Compile complete. Execute main by ./adapter
 
 $(MAIN): $(OBJS)
 	$(CC) $(CFLAGS) -o $(MAIN) $(OBJS) $(LIBS)
