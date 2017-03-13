@@ -6,12 +6,12 @@ LIBS = -lclearblade
 
 SRCS = $(wildcard ./*.c)
 
-OBJS = $(SRCS_C:.c=.o)
+OBJS = $(SRCS:.c=.o)
 
-MAIN = adapter
+MAIN = start_adapter
 
 all: $(MAIN)
-	@echo Compile complete. Execute main by ./adapter
+	@echo Compile complete. Execute main by ./start_adapter
 
 $(MAIN): $(OBJS)
 	$(CC) $(CFLAGS) -o $(MAIN) $(OBJS) $(LIBS)
