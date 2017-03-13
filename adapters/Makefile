@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -g -Wall -Werror -std=c99
+CFLAGS = -g
 
 LIBS = -lclearblade
 

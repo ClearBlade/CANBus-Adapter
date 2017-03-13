@@ -46,4 +46,6 @@ int startCANListnerLoop(const char *interfaceName) {
 	nbytes = write(s, &frame, sizeof(struct can_frame));
 
 	printf("Wrote %d bytes\n", nbytes);
+
+  return 0;
 }
