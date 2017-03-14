@@ -2,7 +2,7 @@ CC = gcc
 
 CFLAGS = -g
 
-LIBS = -lclearblade
+LIBS = -lclearblade -lpthread
 
 SRCS = $(wildcard ./*.c)
 

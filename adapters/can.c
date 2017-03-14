@@ -8,8 +8,18 @@
 #include <sys/ioctl.h>
 #include <linux/can.h>
 #include <linux/can/raw.h>
+#include <pthread.h>
+
+
+void *readCANData(void *canData) {
+  struct can_frame *frame = (struct can_frame *) canData;
+  printf("Received data %s\n", frame->data);
+  pthread_exit(NULL);
+}
+
 
 int startCANListnerLoop(const char *interfaceName) {
+  pthread_t tid;
   int s;
 	int nbytes;
 	struct sockaddr_can addr;
@@ -37,9 +47,14 @@ int startCANListnerLoop(const char *interfaceName) {
 	}
 
   while(1) {
-	   nbytes = read(s, &frame, sizeof(struct can_frame));
-
-	    printf("Read %s\n", frame.data);
+    printf("Came here\n");
+    nbytes = read(s, &frame, sizeof(struct can_frame));
+    if(nbytes) {
+      printf("Came here 2\n");
+      pthread_create(&tid, NULL, readCANData, (void *)&frame);
+      printf("Came here 3\n");
+    }
+    printf("Came here 4\n");
   }
 
   return 0;
