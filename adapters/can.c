@@ -9,11 +9,23 @@
 #include <linux/can.h>
 #include <linux/can/raw.h>
 #include <pthread.h>
+#include "mqtt.h"
 
 
 void *readCANData(void *canData) {
+  char *mqttMessage;
   struct can_frame *frame = (struct can_frame *) canData;
-  printf("Received data %s\n", frame->data);
+  printf("Received data from CAN bus: %s\n", frame->data);
+
+  int size = asprintf(&mqttMessage, "ID: %d, Data: %s", frame->can_id, frame->data);
+  if(size == -1) {
+    printf("Malloc failed while construction MQTT message.\nCannot publish to MQTT\n");
+    pthread_exit(NULL);
+  }
+
+  publishCANMessage(mqttMessage);
+
+  free(mqttMessage);
   pthread_exit(NULL);
 }
 
@@ -47,14 +59,10 @@ int startCANListnerLoop(const char *interfaceName) {
 	}
 
   while(1) {
-    printf("Came here\n");
     nbytes = read(s, &frame, sizeof(struct can_frame));
     if(nbytes) {
-      printf("Came here 2\n");
       pthread_create(&tid, NULL, readCANData, (void *)&frame);
-      printf("Came here 3\n");
     }
-    printf("Came here 4\n");
   }
 
   return 0;
