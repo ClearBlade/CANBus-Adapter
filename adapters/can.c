@@ -2,12 +2,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-
 #include <net/if.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
-
 #include <linux/can.h>
 #include <linux/can/raw.h>
 
@@ -38,14 +36,11 @@ int startCANListnerLoop(const char *interfaceName) {
 		return -1;
 	}
 
-	frame.can_id  = 0x123;
-	frame.can_dlc = 2;
-	frame.data[0] = 0x11;
-	frame.data[1] = 0x22;
+  while(1) {
+	   nbytes = read(s, &frame, sizeof(struct can_frame));
 
-	nbytes = write(s, &frame, sizeof(struct can_frame));
-
-	printf("Wrote %d bytes\n", nbytes);
+	    printf("Read %s\n", frame.data);
+  }
 
   return 0;
 }
