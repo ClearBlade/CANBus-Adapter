@@ -11,6 +11,7 @@
 #include <pthread.h>
 #include "mqtt.h"
 
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void *readCANData(void *canData) {
   char *mqttMessage;
@@ -19,11 +20,13 @@ void *readCANData(void *canData) {
 
   int size = asprintf(&mqttMessage, "ID: %d, Data: %s", frame->can_id, frame->data);
   if(size == -1) {
-    printf("Malloc failed while construction MQTT message.\nCannot publish to MQTT\n");
+    printf("Malloc failed while construction of MQTT message.\nCannot publish to MQTT\n");
     pthread_exit(NULL);
   }
 
+  pthread_mutex_lock(&mutex);
   publishCANMessage(mqttMessage);
+  pthread_mutex_unlock(&mutex);
 
   free(mqttMessage);
   pthread_exit(NULL);
