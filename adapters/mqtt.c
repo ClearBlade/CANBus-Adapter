@@ -40,5 +40,6 @@ int initializeCBAndMQTT() {
 }
 
 void publishCANMessage(char *message) {
+  printf("Send MQTT message: %s\n", message);
   publishMessage(message, "canbus-outgoing", 0, 0);
 }
