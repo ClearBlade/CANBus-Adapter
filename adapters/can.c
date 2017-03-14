@@ -25,7 +25,7 @@ void *readCANData(void *canData) {
 
   publishCANMessage(mqttMessage);
 
-  free(mqttMessage);
+  //free(mqttMessage);
   pthread_exit(NULL);
 }
 
