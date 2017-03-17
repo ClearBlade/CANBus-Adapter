@@ -1,6 +1,6 @@
 # Overview
 
-CAN Bus Adapter allows an automotive's CAN (Controller Area Netowkr) Bus to publish MQTT messages.
+CAN Bus Adapter allows an automotive's CAN (Controller Area Network) Bus to publish MQTT messages.
 
 # Prerequisites
 
@@ -9,7 +9,7 @@ CAN Bus Adapter allows an automotive's CAN (Controller Area Netowkr) Bus to publ
 3. Build libraries
 
 ```
-cd /path/to/aforementioned/libraries/
+cd /path/to/libraries/
 make clean
 make
 sudo make install
