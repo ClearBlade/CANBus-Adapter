@@ -15,6 +15,7 @@ make clean
 make
 sudo make install
 ```
+
 # Install
 
 1. Enter your ClearBlade System details in /adapters/contants.h
