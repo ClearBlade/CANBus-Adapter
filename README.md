@@ -46,11 +46,11 @@ char *USER_EMAIL = <USER_EMAIL>; // ex. "test@clearblade.com"
 char *USER_PASSWORD = <PASSWORD>; // ex. "password"
 
 ...
-```
 
 #endif
 
 ```
+
 2. Build adapter
 
 ```
